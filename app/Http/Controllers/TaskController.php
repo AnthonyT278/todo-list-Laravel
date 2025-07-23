@@ -30,11 +30,11 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|max:233',
+            'title' => 'required|max:255',
             'description' => 'nullable'
         ]);
 
-        Task::create($request->all());
+        Task::create($request->only(['title', 'description']));
 
         return redirect()->route('tasks.index')->with('success', 'Task created successfully');
     }
@@ -50,12 +50,12 @@ class TaskController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-    public function edit(string $id)
-    {
-        $task = Task::findOrFail($id);
-        return view('tasks.edit', compact('task'));
-    }
-    }
+    // public function edit(string $id)
+    // {
+    //     $task = Task::findOrFail($id);
+    //     return view('tasks.edit', compact('task'));
+    // }
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -68,7 +68,7 @@ class TaskController extends Controller
         ]);
 
         $task = Task::findOrFail($id);
-        $task->update($request->all());
+        $task->update($request->only(['title', 'description']));
 
         return redirect()->route('tasks.index')->with('success', 'Task updated seccessfully');
     }

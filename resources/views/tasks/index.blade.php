@@ -16,15 +16,14 @@
                     <form action="{{ route('tasks.toggle-complete', $task) }}" method="POST">
                         @csrf
                         @method('PUT')
-                        <button type="submit" class="btn btn-sm me-2">
+                        <button type="submit" class="btn btn-sm mr-2">
                             @if($task->completed)
                             <i  class="bi bi-check-square-fill text-success"></i>
                             @else
                             <i class="bi bi-square text-secondary"></i>
                             @endif
                         </button>
-                    </form>
-                    <span @class(['text-decoration-line-through' => $task->completed])>
+                    </form>                    <span @class(['text-decoration-line-through' => $task->completed])>
                       <a href="{{ route('tasks.show', $task)}}" class="text-decoration-none">
                         {{ $task->title}}
                       </a>
